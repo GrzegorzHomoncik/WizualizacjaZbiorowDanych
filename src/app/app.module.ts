@@ -8,10 +8,14 @@ import { AppComponent } from './app.component';
 import { FileUploaderComponent } from './file-uploader.component';
 import { FileUploaderService } from './file-uploader.service';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { NavBarComponent } from './nav-bar/nav-bar.component';
+import { ChartComponent } from './chart/chart.component';
 @NgModule({
   declarations: [
     AppComponent,
-    FileUploaderComponent
+    FileUploaderComponent,
+    NavBarComponent,
+    ChartComponent
   ],
   imports: [
     BrowserModule,
