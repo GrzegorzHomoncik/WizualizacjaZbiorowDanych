@@ -19,6 +19,7 @@ export class AppComponent {
 
   public scatterChartData: ChartDataSets[] = [
     {
+
       data: [
         { x: -1, y: -1 },
         { x: -4, y: 3 },
@@ -38,6 +39,6 @@ export class AppComponent {
   }
 
   onCompleteItem($event) {
-    console.log($event);
+    console.log($event.response);
   }
 }

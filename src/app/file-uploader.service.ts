@@ -42,7 +42,7 @@ export class FileQueueObject {
 @Injectable()
 export class FileUploaderService {
 
-  public url: string = 'https://jsonplaceholder.typicode.com/posts';
+  public url: string = 'http://127.0.0.1:5000/?dimensions=2&method=MDS';
 
   private _queue: BehaviorSubject<FileQueueObject[]>;
   private _files: FileQueueObject[] = [];
@@ -103,7 +103,7 @@ export class FileUploaderService {
   private _upload(queueObj: FileQueueObject) {
     // create form data for file
     const form = new FormData();
-    form.append('file', queueObj.file, queueObj.file.name);
+    form.append('korpus', queueObj.file, queueObj.file.name);
 
     // upload file and report progress
     const req = new HttpRequest('POST', this.url, form, {
