@@ -29,7 +29,7 @@ export class AppComponent {
         { x: 4, y: 4 },
         { x: 1, y: 2 },
       ],
-      label: 'Series A',
+      label: 'Test',
       pointRadius: 10,
     },
   ];
@@ -51,7 +51,20 @@ export class AppComponent {
     for(var i = 0; i < this.resp.length;++i){
       x = this.resp[i][0];
       y = this.resp[i][1];
+     this.data2.push({
+       'x':x,
+       'y':y,
+     });
      
     }
+    console.log(this.data2);
+    this.scatterChartData = [
+      {
+  
+        data: this.data2,
+        label: 'korpus 1',
+        pointRadius: 10,
+      },
+    ];
   }
 }
