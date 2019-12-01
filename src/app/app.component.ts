@@ -2,7 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { ChartDataSets, ChartType, ChartOptions } from 'chart.js';
 import { Label } from 'ng2-charts';
 import { FileQueueObject } from './file-uploader.service';
-
+import { AngularWaitBarrier } from 'blocking-proxy/built/lib/angular_wait_barrier';
+import * as angular from "angular";
 
 @Component({
   selector: 'app-root',
@@ -11,7 +12,8 @@ import { FileQueueObject } from './file-uploader.service';
 })
 export class AppComponent {
   title = 'my-app';
-  
+  resp : any = [];
+  data2 : any = [];
   
   public scatterChartOptions: ChartOptions = {
     responsive: true,
@@ -39,6 +41,17 @@ export class AppComponent {
   }
 
   onCompleteItem($event) {
+    this.resp = $event.response;
     console.log($event.response);
+  }
+  onPrzelicz() {
+    var x;
+    var y;
+    console.log(this.resp[0][0]);
+    for(var i = 0; i < this.resp.length;++i){
+      x = this.resp[i][0];
+      y = this.resp[i][1];
+     
+    }
   }
 }
