@@ -42,6 +42,7 @@ export class FileQueueObject {
 @Injectable()
 export class FileUploaderService {
 
+  public baseUrl: string = 'http://127.0.0.1:5000/?dimensions=2';
   public url: string = 'http://127.0.0.1:5000/?dimensions=2&method=MDS';
 
   private _queue: BehaviorSubject<FileQueueObject[]>;
@@ -80,6 +81,13 @@ export class FileUploaderService {
         this._upload(queueObj);
       }
     });
+  }
+  
+  onChangeofOptions(newGov) {
+    if(newGov != null)
+      this.url = this.baseUrl + "&method=" + newGov; 
+    console.log(this.url);
+    console.log("duposko");
   }
 
   // private functions
