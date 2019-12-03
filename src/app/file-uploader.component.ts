@@ -17,6 +17,8 @@ export class FileUploaderComponent implements OnInit {
   @ViewChild('fileInput') fileInput;
   queue: Observable<FileQueueObject[]>;
 
+  public method : string = "Choose method";
+
   constructor(public uploader: FileUploaderService) { }
 
   ngOnInit() {

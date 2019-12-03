@@ -86,8 +86,7 @@ export class FileUploaderService {
   onChangeofOptions(newGov) {
     if(newGov != null)
       this.url = this.baseUrl + "&method=" + newGov; 
-    console.log(this.url);
-    console.log("duposko");
+      console.log(this.url);
   }
 
   // private functions

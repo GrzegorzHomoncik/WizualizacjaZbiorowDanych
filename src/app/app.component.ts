@@ -42,12 +42,8 @@ export class AppComponent {
 
   onCompleteItem($event) {
     this.resp = $event.response;
-    console.log($event.response);
-  }
-  onPrzelicz() {
     var x;
     var y;
-    console.log(this.resp[0][0]);
     for(var i = 0; i < this.resp.length;++i){
       x = this.resp[i][0];
       y = this.resp[i][1];
