@@ -21,7 +21,6 @@ export class AppComponent {
 
   public scatterChartData: ChartDataSets[] = [
     {
-
       data: [
         { x: -1, y: -1 },
         { x: -4, y: 3 },
@@ -32,6 +31,7 @@ export class AppComponent {
       label: 'Test',
       pointRadius: 10,
     },
+    
   ];
   public scatterChartType: ChartType = 'scatter';
 
@@ -44,12 +44,16 @@ export class AppComponent {
     this.resp = $event.response;
     var x;
     var y;
+    while(this.data2.length > 0) {
+      this.data2.pop();
+  }
     for(var i = 0; i < this.resp.length;++i){
       x = this.resp[i][0];
       y = this.resp[i][1];
      this.data2.push({
        'x':x,
        'y':y,
+       text:'MetaDane'
      });
      
     }

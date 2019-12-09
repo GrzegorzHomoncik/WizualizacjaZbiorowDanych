@@ -1,6 +1,6 @@
 <div class="row">
     <div class="col-md-3">
-        <a style="text-align: right; font-size: x-large;">Choose method:</a>
+        <a style="text-align: right; font-size: x-large;">Wybierz metode:</a>
     </div>
     <div class="col-md-9">
         <select class="browser-default custom-select custom-select-lg mb-3" [(ngModel)]="method" (ngModelChange)="uploader.onChangeofOptions($event)">
@@ -15,20 +15,20 @@
 
 <div class="row">
         <div class="col-md-4">
-            <h3>Select files</h3>
+            <h3>Wybierz plik</h3>
             <input type="file" #fileInput multiple (change)="addToQueue()" />
         </div>
     
         <div class="col-md-8">
-            <h3>Upload queue</h3>
+            <h3>Kolejka wysyłania</h3>
             <table class="table table-striped">
                 <thead>
                     <tr>
-                        <th class="text-left">Name</th>
-                        <th class="text-right">Size</th>
-                        <th class="text-left">Progress</th>
+                        <th class="text-left">Nazwa</th>
+                        <th class="text-right">Rozmiar</th>
+                        <th class="text-left">Progres</th>
                         <th class="text-left">Status</th>
-                        <th class="text-right">Actions</th>
+                        <th class="text-right">Akcja</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -57,8 +57,8 @@
                 </tbody>
             </table>
             <div>
-                <a class="btn btn-outline-warning" (click)="uploader.clearQueue()">Clear queue</a>
-                <a class="btn btn-outline-success" (click)="uploader.uploadAll()">Upload all</a>
+                <a class="btn btn-warning btn-outline-warning" (click)="uploader.clearQueue()">Wyczyść</a>
+                <a class="btn btn-success btn-outline-success" (click)="uploader.uploadAll()">Wyślij</a>
             </div>
         </div>
     
