@@ -14,29 +14,24 @@ import {Model} from './model/model';
 export class AppComponent {
   title = 'my-app';
   resp: Model[];
-  data2: any = [['meh', 8, 12]];
+  chartData: [[string, number, number]] = [['', 0, 0]];
 
   onCompleteItem($event) {
     this.resp = $event.response;
     let x;
     let y;
     let label;
-    const dataBuffer = [];
-    while (this.data2.length > 0) {
-      this.data2.pop();
-    }
+    this.chartData = [['', 0, 0]];
+    this.chartData.pop();
     for (const record of this.resp) {
       x = record.position[0];
       y = record.position[1];
       label = record.file_name;
-      dataBuffer.push([
+      this.chartData.push([
         label,
         x,
         y,
       ]);
-
     }
-    this.data2 = dataBuffer;
-
   }
 }
