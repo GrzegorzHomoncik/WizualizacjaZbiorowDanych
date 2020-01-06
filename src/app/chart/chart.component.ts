@@ -1,36 +1,36 @@
-import { Component, OnInit } from '@angular/core';
-import { ChartDataSets, ChartType, ChartOptions } from 'chart.js';
-import { Label } from 'ng2-charts';
+import {Component, Input} from '@angular/core';
+
+let input = Input;
+
 @Component({
   selector: 'app-chart',
   templateUrl: './chart.component.html',
   styleUrls: ['./chart.component.css']
 })
-export class ChartComponent implements OnInit {
+export class ChartComponent {
 
-  
-  public scatterChartOptions: ChartOptions = {
-    responsive: true,
-  };
-
-  public scatterChartData: ChartDataSets[] = [
-    {
-      data: [
-        { x: -1, y: -1 },
-        { x: -4, y: 3 },
-        { x: 3, y: -4 },
-        { x: 4, y: 4 },
-        { x: 1, y: 2 },
-      ],
-      label: 'Series A',
-      pointRadius: 10,
-    },
+  bubbleOpt = {textStyle: {color: 'black', fontName: 'Arial', fontSize: '1'}};
+  type = 'BubbleChart';
+  @Input() data = [
+    ['meh', 8, 12],
+    ['s', 4, 5.5],
+    ['a', 11, 14],
+    ['b', 3, 3.5],
+    ['c', 6.5, 7]
   ];
-  public scatterChartType: ChartType = 'scatter';
-
-  constructor() { }
-
-  ngOnInit() {
-  }
+  columnNames = ['File name', 'x', 'y'];
+  options = {
+    fontSize: 0,
+    sizeAxis: {minSize: 4, maxSize: 4},
+    bubble: {
+      textStyle: {
+        fontSize: 1,
+        fontName: 'Times-Roman',
+        bold: false,
+        italic: true
+      }
+    },
+    backgroundColor: {fill: 'transparent'},
+  };
 
 }

@@ -9,9 +9,9 @@
   </head>
 
 <app-nav-bar></app-nav-bar>
-   <!-- file upload 
-   <div class="row"> 
-      <div class="col">  
+   <!-- file upload
+   <div class="row">
+      <div class="col">
         <div class="input-group">
           <div class="input-group-prepend">
             <span class="input-group-text" id="inputGroupFileAddon01">Plik</span>
@@ -23,8 +23,8 @@
         </div>
       </div>
     </div>
-    <div class="row"> 
-      <div class="col-4"style="float:none;margin:auto;"> 
+    <div class="row">
+      <div class="col-4"style="float:none;margin:auto;">
         <div style="display: block;">
           <canvas baseChart
             [datasets]="scatterChartData"
@@ -36,20 +36,20 @@
     </div>
 
   -->
-  
-  
+
+
   <div class="container">
       <div class="panel panel-default">
-          <div class="panel-heading"> 
+          <div class="panel-heading">
               <file-uploader (onCompleteItem)="onCompleteItem($event)"></file-uploader>
           </div>
         </div>
     </div>
 
-<!--  
+<!--
   <div class="container">
     <div class="panel panel-default">
-      <div class="panel-heading"> 
+      <div class="panel-heading">
         <app-chart></app-chart>
       </div>
     </div>
@@ -58,21 +58,10 @@
 
 <div class="container">
   <div class="panel panel-default">
-    <div class="panel-heading">   
-      <div class="col-8"style="float:none;margin:auto;"> 
-        <div style="display: block;">
-          <canvas baseChart
-            [datasets]="scatterChartData"
-            [options]="scatterChartOptions"
-            [chartType]="scatterChartType">
-          </canvas>
-        </div>
-      </div>
+    <div class="panel-heading">
+      <app-chart [data]="data2"></app-chart>
     </div>
   </div>
 </div>
-
-
-
 
     <router-outlet></router-outlet>

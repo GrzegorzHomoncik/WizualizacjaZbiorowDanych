@@ -1,9 +1,11 @@
-<div class="col-4"style="float:none;margin:auto;"> 
+<div class="col-8"style="float:none;margin:auto;">
   <div style="display: block;">
-      <canvas baseChart
-        [datasets]="scatterChartData"
-        [options]="scatterChartOptions"
-        [chartType]="scatterChartType">
-      </canvas>
+    <google-chart #chart
+                  [title]="title"
+                  [type]="type"
+                  [data]="data"
+                  [columnNames]="columnNames"
+                  [options]="options">
+    </google-chart>
   </div>
 </div>
