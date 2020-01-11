@@ -1,10 +1,6 @@
-import {Component, OnInit} from '@angular/core';
-import {ChartDataSets, ChartType, ChartOptions} from 'chart.js';
-import {Label} from 'ng2-charts';
-import {FileQueueObject} from './file-uploader.service';
-import {AngularWaitBarrier} from 'blocking-proxy/built/lib/angular_wait_barrier';
-import * as angular from 'angular';
+import {Component} from '@angular/core';
 import {Model} from './model/model';
+import {KMeans} from "./KMeans/kmeans";
 
 @Component({
   selector: 'app-root',
@@ -33,5 +29,11 @@ export class AppComponent {
         y,
       ]);
     }
+  }
+
+  onClick() {
+    let kmeans: KMeans;
+    kmeans = new KMeans(this.resp);
+    kmeans.setup();
   }
 }
