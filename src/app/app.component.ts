@@ -1,6 +1,5 @@
 import {Component} from '@angular/core';
 import {Model} from './model/model';
-import {KMeans} from "./KMeans/kmeans";
 
 @Component({
   selector: 'app-root',
@@ -31,9 +30,4 @@ export class AppComponent {
     }
   }
 
-  onClick() {
-    let kmeans: KMeans;
-    kmeans = new KMeans(this.resp);
-    kmeans.setup();
-  }
 }
