@@ -43,7 +43,7 @@ export class FileQueueObject {
 export class FileUploaderService {
 
   public baseUrl: string = 'http://127.0.0.1:5000/?dimensions=2';
-  public url: string = 'http://127.0.0.1:5000/?dimensions=2&method=MDS';
+  public url: string = 'http://127.0.0.1:5000/?dimensions=2';
 
   private _queue: BehaviorSubject<FileQueueObject[]>;
   private _files: FileQueueObject[] = [];
@@ -82,10 +82,10 @@ export class FileUploaderService {
       }
     });
   }
-  
+
   onChangeofOptions(newGov) {
     if(newGov != null)
-      this.url = this.baseUrl + "&method=" + newGov; 
+      this.url = this.baseUrl + "&method=" + newGov;
       console.log(this.url);
   }
 

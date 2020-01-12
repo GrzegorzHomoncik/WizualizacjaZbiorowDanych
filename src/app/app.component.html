@@ -6,45 +6,45 @@
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
-  </head>
+</head>
 
 <app-nav-bar></app-nav-bar>
-   <!-- file upload
-   <div class="row">
-      <div class="col">
-        <div class="input-group">
-          <div class="input-group-prepend">
-            <span class="input-group-text" id="inputGroupFileAddon01">Plik</span>
-          </div>
-          <div class="custom-file">
-              <input ng2FileSelect type="file" accept=".xml" [uploader]="uploader" type="file" class="custom-file-input" id="customFileLangHTML">
-              <label class="custom-file-label" for="customFileLangHTML" data-browse="Szukaj">Wybierz korpus</label>
-            </div>
-        </div>
-      </div>
-    </div>
-    <div class="row">
-      <div class="col-4"style="float:none;margin:auto;">
-        <div style="display: block;">
-          <canvas baseChart
-            [datasets]="scatterChartData"
-            [options]="scatterChartOptions"
-            [chartType]="scatterChartType">
-          </canvas>
-        </div>
-      </div>
-    </div>
+<!-- file upload
+<div class="row">
+   <div class="col">
+     <div class="input-group">
+       <div class="input-group-prepend">
+         <span class="input-group-text" id="inputGroupFileAddon01">Plik</span>
+       </div>
+       <div class="custom-file">
+           <input ng2FileSelect type="file" accept=".xml" [uploader]="uploader" type="file" class="custom-file-input" id="customFileLangHTML">
+           <label class="custom-file-label" for="customFileLangHTML" data-browse="Szukaj">Wybierz korpus</label>
+         </div>
+     </div>
+   </div>
+ </div>
+ <div class="row">
+   <div class="col-4"style="float:none;margin:auto;">
+     <div style="display: block;">
+       <canvas baseChart
+         [datasets]="scatterChartData"
+         [options]="scatterChartOptions"
+         [chartType]="scatterChartType">
+       </canvas>
+     </div>
+   </div>
+ </div>
 
-  -->
+-->
 
 
-  <div class="container">
-      <div class="panel panel-default">
-          <div class="panel-heading">
-              <file-uploader (onCompleteItem)="onCompleteItem($event)"></file-uploader>
-          </div>
-        </div>
+<div class="container">
+  <div class="panel panel-default">
+    <div class="panel-heading">
+      <file-uploader (onCompleteItem)="onCompleteItem($event)"></file-uploader>
     </div>
+  </div>
+</div>
 
 <!--
   <div class="container">
@@ -55,24 +55,56 @@
     </div>
   </div>
 -->
-
+<div *ngIf="responseLoaded">
 <div class="container">
   <div class="panel panel-default">
     <div class="panel-heading">
-      <app-chart [data]="chartData"></app-chart>
+      Isomap
     </div>
-  </div>
+    <div class="panel-body">
+    <app-chart [inputData]="resp.isomap"></app-chart>
+    </div>
+    </div>
 </div>
-<!--
-<div class ="container">
+<div class="container">
   <div class="panel panel-default">
     <div class="panel-heading">
-  <button
-  (click)="onClick()">Uruchom uczenie
-  </button>
+     Locally Linear Embedding
+    </div>
+    <div class="panel-body">
+      <app-chart [inputData]="resp.locallyLinearEmbedding"></app-chart>
     </div>
   </div>
-
 </div>
--->
-    <router-outlet></router-outlet>
+<div class="container">
+  <div class="panel panel-default">
+    <div class="panel-heading">
+      MDS
+    </div>
+    <div class="panel-body">
+      <app-chart [inputData]="resp.MDS"></app-chart>
+    </div>
+  </div>
+</div>
+<div class="container">
+  <div class="panel panel-default">
+    <div class="panel-heading">
+      TSNE
+    </div>
+    <div class="panel-body">
+      <app-chart [inputData]="resp.TSNE"></app-chart>
+    </div>
+  </div>
+</div>
+<div class="container">
+  <div class="panel panel-default">
+    <div class="panel-heading">
+      Spectral Embedding
+    </div>
+    <div class="panel-body">
+      <app-chart [inputData]="resp.spectralEmbedding"></app-chart>
+    </div>
+  </div>
+</div>
+</div>
+<router-outlet></router-outlet>
