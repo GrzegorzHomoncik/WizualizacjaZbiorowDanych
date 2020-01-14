@@ -27,8 +27,6 @@ export class FileUploaderComponent implements OnInit {
   }
 
   completeItem = (item: FileQueueObject, response: any) => {
-    console.log("Response in completeItem")
-    console.log(response)
     this.onCompleteItem.emit({ item, response });
   }
 

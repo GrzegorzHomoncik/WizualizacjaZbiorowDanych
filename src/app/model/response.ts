@@ -1,9 +1,10 @@
 import {Model} from './model';
+import {ChartModel} from "./chartModel";
 
 export class Response {
-  isomap: [Model];
-  locallyLinearEmbedding: [Model];
-  MDS: [Model];
-  TSNE: [Model];
-  spectralEmbedding: [Model];
+  isomap: ChartModel[];
+  locallyLinearEmbedding: ChartModel[];
+  MDS: ChartModel[];
+  TSNE: ChartModel[];
+  spectralEmbedding: ChartModel[];
 }

@@ -23,6 +23,7 @@ export class ChartComponent implements OnInit {
         italic: true
       }
     },
+    colors: ['red', 'yellow', 'green', 'blue'],
     height: 600,
     width: 800,
     backgroundColor: {fill: 'transparent'},
@@ -32,16 +33,19 @@ export class ChartComponent implements OnInit {
     let x;
     let y;
     let label;
+    let color;
     this.data = [['', 0, 0]];
     this.data.pop();
     for (const record of this.inputData) {
       x = record.position[0];
       y = record.position[1];
       label = record.file_name;
+      color = record.color;
       this.data.push([
         label,
         x,
         y,
+        color
       ]);
     }
   }

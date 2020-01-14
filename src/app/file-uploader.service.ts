@@ -42,8 +42,8 @@ export class FileQueueObject {
 @Injectable()
 export class FileUploaderService {
 
-  public baseUrl: string = 'http://127.0.0.1:5000/?dimensions=2';
-  public url: string = 'http://127.0.0.1:5000/?dimensions=2';
+  public baseUrl: string = 'http://127.0.0.1:5000/?dimensions=3';
+  public url: string = 'http://127.0.0.1:5000/?dimensions=3';
 
   private _queue: BehaviorSubject<FileQueueObject[]>;
   private _files: FileQueueObject[] = [];
@@ -86,7 +86,6 @@ export class FileUploaderService {
   onChangeofOptions(newGov) {
     if(newGov != null)
       this.url = this.baseUrl + "&method=" + newGov;
-      console.log(this.url);
   }
 
   // private functions

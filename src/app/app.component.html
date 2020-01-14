@@ -46,65 +46,51 @@
   </div>
 </div>
 
-<!--
+<div *ngIf="responseLoaded">
   <div class="container">
     <div class="panel panel-default">
-      <div class="panel-heading">
-        <app-chart></app-chart>
+      <div class="panel-body">
+        <app-highchart
+          title="Isomap"
+          [chartData]="resp.isomap"></app-highchart>
       </div>
     </div>
   </div>
--->
-<div *ngIf="responseLoaded">
-<div class="container">
-  <div class="panel panel-default">
-    <div class="panel-heading">
-      Isomap
-    </div>
-    <div class="panel-body">
-    <app-chart [inputData]="resp.isomap"></app-chart>
-    </div>
-    </div>
-</div>
-<div class="container">
-  <div class="panel panel-default">
-    <div class="panel-heading">
-     Locally Linear Embedding
-    </div>
-    <div class="panel-body">
-      <app-chart [inputData]="resp.locallyLinearEmbedding"></app-chart>
+  <div class="container">
+    <div class="panel panel-default">
+      <div class="panel-body">
+        <app-highchart
+          title="Locally Linear Embedding"
+          [chartData]="resp.locallyLinearEmbedding"></app-highchart>
+      </div>
     </div>
   </div>
-</div>
-<div class="container">
-  <div class="panel panel-default">
-    <div class="panel-heading">
-      MDS
-    </div>
-    <div class="panel-body">
-      <app-chart [inputData]="resp.MDS"></app-chart>
-    </div>
-  </div>
-</div>
-<div class="container">
-  <div class="panel panel-default">
-    <div class="panel-heading">
-      TSNE
-    </div>
-    <div class="panel-body">
-      <app-chart [inputData]="resp.TSNE"></app-chart>
+  <div class="container">
+    <div class="panel panel-default">
+      <div class="panel-body">
+        <app-highchart
+          title="MDS"
+          [chartData]="resp.MDS"></app-highchart>
+      </div>
     </div>
   </div>
-</div>
-<div class="container">
-  <div class="panel panel-default">
-    <div class="panel-heading">
-      Spectral Embedding
-    </div>
-    <div class="panel-body">
-      <app-chart [inputData]="resp.spectralEmbedding"></app-chart>
+  <div class="container">
+    <div class="panel panel-default">
+      <div class="panel-body">
+        <app-highchart
+          title="TSNE"
+          [chartData]="resp.TSNE"></app-highchart>
+      </div>
     </div>
   </div>
-</div>
+  <div class="container">
+    <div class="panel panel-default">
+      <div class="panel-body">
+        <app-highchart
+          title="Spectral Embedding"
+          [chartData]="resp.spectralEmbedding"></app-highchart>
+      </div>
+    </div>
+  </div>
 </div>
 <router-outlet></router-outlet>
