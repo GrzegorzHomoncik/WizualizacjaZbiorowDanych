@@ -1,8 +1,7 @@
-import { Component, EventEmitter, OnInit, Output, ViewChild } from '@angular/core';
-import { FileQueueObject, FileUploaderService } from './file-uploader.service';
-import { FormGroup, FormBuilder } from '@angular/forms';
+import {Component, EventEmitter, OnInit, Output, ViewChild} from '@angular/core';
+import {FileQueueObject, FileUploaderService} from './file-uploader.service';
 
-import { Observable } from 'rxjs';
+import {Observable} from 'rxjs';
 
 @Component({
   selector: 'file-uploader, [file-uploader]',
@@ -17,9 +16,10 @@ export class FileUploaderComponent implements OnInit {
   @ViewChild('fileInput') fileInput;
   queue: Observable<FileQueueObject[]>;
 
-  public method : string = "Choose method";
+  public nrOfDimensions: number;
 
-  constructor(public uploader: FileUploaderService) { }
+  constructor(public uploader: FileUploaderService) {
+  }
 
   ngOnInit() {
     this.queue = this.uploader.queue;
@@ -27,8 +27,8 @@ export class FileUploaderComponent implements OnInit {
   }
 
   completeItem = (item: FileQueueObject, response: any) => {
-    this.onCompleteItem.emit({ item, response });
-  }
+    this.onCompleteItem.emit({item, response});
+  };
 
   addToQueue() {
     const fileBrowser = this.fileInput.nativeElement;
