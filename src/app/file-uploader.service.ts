@@ -1,10 +1,9 @@
 import * as _ from 'lodash';
 
-import { HttpClient, HttpErrorResponse, HttpHeaders, HttpRequest, HttpResponse } from '@angular/common/http';
-import { Injectable, Output } from '@angular/core';
+import {HttpClient, HttpErrorResponse, HttpEventType, HttpRequest, HttpResponse} from '@angular/common/http';
+import {Injectable} from '@angular/core';
 
-import { BehaviorSubject, Subscription } from 'rxjs';
-import { HttpEventType } from '@angular/common/http';
+import {BehaviorSubject, Subscription} from 'rxjs';
 
 export enum FileQueueStatus {
   Pending,
@@ -25,9 +24,12 @@ export class FileQueueObject {
   }
 
   // actions
-  public upload = () => { /* set in service */ };
-  public cancel = () => { /* set in service */ };
-  public remove = () => { /* set in service */ };
+  public upload = () => { /* set in service */
+  };
+  public cancel = () => { /* set in service */
+  };
+  public remove = () => { /* set in service */
+  };
 
   // statuses
   public isPending = () => this.status === FileQueueStatus.Pending;
@@ -42,8 +44,8 @@ export class FileQueueObject {
 @Injectable()
 export class FileUploaderService {
 
-  public baseUrl: string = 'http://127.0.0.1:5000/?dimensions=3';
-  public url: string = 'http://127.0.0.1:5000/?dimensions=3';
+  public baseUrl: string = 'http://127.0.0.1:5000/';
+  public url: string = 'http://127.0.0.1:5000/';
 
   private _queue: BehaviorSubject<FileQueueObject[]>;
   private _files: FileQueueObject[] = [];
@@ -59,7 +61,7 @@ export class FileUploaderService {
 
   // public events
   public onCompleteItem(queueObj: FileQueueObject, response: any): any {
-    return { queueObj, response };
+    return {queueObj, response};
   }
 
   // public functions
@@ -84,8 +86,9 @@ export class FileUploaderService {
   }
 
   onChangeofOptions(newGov) {
-    if(newGov != null)
-      this.url = this.baseUrl + "&method=" + newGov;
+    if (newGov != null) {
+      this.url = this.baseUrl + '?dimensions=' + newGov;
+    }
   }
 
   // private functions

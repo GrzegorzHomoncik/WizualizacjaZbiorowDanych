@@ -1,5 +1,4 @@
-import {Model} from './model';
-import {ChartModel} from "./chartModel";
+import {ChartModel} from './chartModel';
 
 export class Response {
   isomap: ChartModel[];
