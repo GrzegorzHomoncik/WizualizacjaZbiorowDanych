@@ -27,8 +27,8 @@ export class FileUploaderComponent implements OnInit {
   }
 
   completeItem = (item: FileQueueObject, response: any) => {
-    this.onCompleteItem.emit({item, response});
-  };
+    this.onCompleteItem.emit({item, response, nrOfDimensions: this.nrOfDimensions});
+  }
 
   addToQueue() {
     const fileBrowser = this.fileInput.nativeElement;

@@ -8,21 +8,22 @@ import {AppComponent} from './app.component';
 import {FileUploaderComponent} from './file-uploader.component';
 import {FileUploaderService} from './file-uploader.service';
 import {NavBarComponent} from './nav-bar/nav-bar.component';
-import {ChartComponent} from './chart/chart.component';
+import {TwoDimChartComponent} from './chart/two-dim-chart.component';
 import {GoogleChartsModule} from 'angular-google-charts';
-import { CustomChartComponent } from './chart/custom-chart/custom-chart.component';
-import { HighchartComponent } from './chart/highchart/highchart.component';
+import {CustomChartComponent} from './chart/custom-chart/custom-chart.component';
+import {HighchartComponent} from './three-dim-chart/highchart/highchart.component';
 import {HighchartsChartModule} from 'highcharts-angular';
-import NoDataToDisplay from 'highcharts/modules/no-data-to-display';
+import {ThreeDimChartComponent} from './three-dim-chart/three-dim-chart.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     FileUploaderComponent,
     NavBarComponent,
-    ChartComponent,
+    TwoDimChartComponent,
     CustomChartComponent,
-    HighchartComponent
+    HighchartComponent,
+    ThreeDimChartComponent
   ],
   imports: [
     GoogleChartsModule,

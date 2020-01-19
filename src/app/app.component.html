@@ -41,56 +41,23 @@
 <div class="container">
   <div class="panel panel-default">
     <div class="panel-heading">
-      <file-uploader (onCompleteItem)="onCompleteItem($event)"></file-uploader>
+      <file-uploader
+        (onCompleteItem)="onCompleteItem($event)"
+      ></file-uploader>
     </div>
   </div>
 </div>
 
 <div *ngIf="responseLoaded">
-  <div class="container">
-    <div class="panel panel-default">
-      <div class="panel-body">
-        <app-highchart
-          title="Isomap"
-          [chartData]="resp.isomap"></app-highchart>
-      </div>
-    </div>
+  <div *ngIf="nrOfDimensions==2">
+    <app-two-dim-chart>
+
+    </app-two-dim-chart>
   </div>
-  <div class="container">
-    <div class="panel panel-default">
-      <div class="panel-body">
-        <app-highchart
-          title="Locally Linear Embedding"
-          [chartData]="resp.locallyLinearEmbedding"></app-highchart>
-      </div>
-    </div>
+  <div *ngIf="nrOfDimensions==3">
+    <app-three-dim-chart [dataPackage]="resp">
+    </app-three-dim-chart>
   </div>
-  <div class="container">
-    <div class="panel panel-default">
-      <div class="panel-body">
-        <app-highchart
-          title="MDS"
-          [chartData]="resp.MDS"></app-highchart>
-      </div>
-    </div>
-  </div>
-  <div class="container">
-    <div class="panel panel-default">
-      <div class="panel-body">
-        <app-highchart
-          title="TSNE"
-          [chartData]="resp.TSNE"></app-highchart>
-      </div>
-    </div>
-  </div>
-  <div class="container">
-    <div class="panel panel-default">
-      <div class="panel-body">
-        <app-highchart
-          title="Spectral Embedding"
-          [chartData]="resp.spectralEmbedding"></app-highchart>
-      </div>
-    </div>
-  </div>
+
 </div>
 <router-outlet></router-outlet>
