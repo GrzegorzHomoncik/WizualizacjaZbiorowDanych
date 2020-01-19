@@ -1,13 +1,26 @@
-<div style="float:none;margin:auto;">
-  <div class="row">
-    <div class="col-12" align="center" >
+<div class="container">
+  <div class="panel panel-default">
+    <div class="panel-body">
       <google-chart #chart
-                    [title]="title"
+                    title="Isomap"
                     [type]="type"
-                    [data]="data"
+                    [data]="dataIsomap"
                     [columnNames]="columnNames"
-                    [options]="options">
-      </google-chart>
+                    [options]="options"></google-chart>
+      [chartData]="dataPackage.isomap"
+    </div>
+  </div>
+</div>
+<div class="container">
+  <div class="panel panel-default">
+    <div class="panel-body">
+      <google-chart #chart
+                    title="Isomap"
+                    [type]="type"
+                    [data]="dataIsomap"
+                    [columnNames]="columnNames"
+                    [options]="options"></google-chart>
+      [chartData]="dataPackage.isomap"
     </div>
   </div>
 </div>
