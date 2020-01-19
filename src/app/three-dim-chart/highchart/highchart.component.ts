@@ -20,15 +20,13 @@ export class HighchartComponent implements OnChanges {
     this.chartOptions = {
       chart: {
         type: 'scatter',
-        marginBottom: 100,
-        marginRight: 50,
         backgroundColor: 'transparent',
         options3d: {
           enabled: true,
           alpha: 10,
           beta: 30,
           depth: 250,
-          viewDistance: 5,
+          viewDistance: 3,
           frame: {
             bottom: {
               size: 1,
@@ -47,18 +45,6 @@ export class HighchartComponent implements OnChanges {
       },
       title: {
         text: this.title
-      },
-      xAxis: {
-        min: -1,
-        max: 1
-      },
-      yAxis: {
-        min: -1,
-        max: 1
-      },
-      zAxis: {
-        min: -1,
-        max: 1
       },
       tooltip: {
         useHTML: true,

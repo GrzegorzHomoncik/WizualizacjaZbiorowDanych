@@ -12,9 +12,10 @@ export class AppComponent {
   title = 'my-app';
   resp: Response;
   private responseLoaded: boolean;
+  private nrOfDimensions: number;
 
   onCompleteItem($event) {
-
+    this.nrOfDimensions = $event.nrOfDimensions;
     this.resp = this.mapIntoChartModel($event.response);
     this.responseLoaded = true;
   }
@@ -56,7 +57,7 @@ export class AppComponent {
   private mapData(arr: Model[]) {
     const newArr = [];
     for (const element of arr) {
-        newArr.push(this.mapModelToChartModel(element));
+      newArr.push(this.mapModelToChartModel(element));
     }
     return newArr;
   }
