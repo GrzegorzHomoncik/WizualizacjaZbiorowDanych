@@ -1,4 +1,6 @@
 import {Component, Input, OnInit} from '@angular/core';
+import {Response} from "../model/response";
+import {ChartModel} from "../model/chartModel";
 
 @Component({
   selector: 'app-two-dim-chart',
@@ -8,8 +10,12 @@ import {Component, Input, OnInit} from '@angular/core';
 export class TwoDimChartComponent implements OnInit {
 
   type = 'BubbleChart';
-  @Input() inputData = [];
-  data = [];
+  @Input() dataPackage: Response;
+  dataIsomap: [(string | number)[]];
+  dataLocallyLinearEmbedding: [(string | number)[]];
+  dataMDS: [(string | number)[]];
+  dataTSNE: [(string | number)[]];
+  dataSpectralEmbedding: [(string | number)[]];
   columnNames = ['File name', 'x', 'y'];
   options = {
     fontSize: 0,
@@ -30,25 +36,19 @@ export class TwoDimChartComponent implements OnInit {
   };
 
   ngOnInit(): void {
-    let x;
-    let y;
-    let label;
-    let color;
-    this.data = [['', 0, 0]];
-    this.data.pop();
-    for (const record of this.inputData) {
-      x = record.position[0];
-      y = record.position[1];
-      label = record.file_name;
-      color = record.color;
-      this.data.push([
-        label,
-        x,
-        y,
-        color
+    this.insertDataIntoChartFormat(this.dataIsomap, this.dataPackage.isomap);
+  }
+
+  insertDataIntoChartFormat(data: [(string | number)[]], inputData: ChartModel[]) {
+    data = [['', 0, 0]];
+    data.pop();
+    for (const record of inputData) {
+      data.push([
+        record.label,
+        record.x,
+        record.y,
+        record.color
       ]);
     }
   }
-
-
 }
