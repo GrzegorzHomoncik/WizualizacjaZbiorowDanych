@@ -1,6 +1,6 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {Response} from "../model/response";
-import {ChartModel} from "../model/chartModel";
+import {Response} from '../model/response';
+import {ChartModel} from '../model/chartModel';
 
 @Component({
   selector: 'app-two-dim-chart',
@@ -11,11 +11,11 @@ export class TwoDimChartComponent implements OnInit {
 
   type = 'BubbleChart';
   @Input() dataPackage: Response;
-  dataIsomap: [(string | number)[]];
-  dataLocallyLinearEmbedding: [(string | number)[]];
-  dataMDS: [(string | number)[]];
-  dataTSNE: [(string | number)[]];
-  dataSpectralEmbedding: [(string | number)[]];
+  dataIsomap: (string | number)[][];
+  dataLocallyLinearEmbedding: (string | number)[][];
+  dataMDS: (string | number)[][];
+  dataTSNE: (string | number)[][];
+  dataSpectralEmbedding: (string | number)[][];
   columnNames = ['File name', 'x', 'y'];
   options = {
     fontSize: 0,
@@ -36,11 +36,15 @@ export class TwoDimChartComponent implements OnInit {
   };
 
   ngOnInit(): void {
-    this.insertDataIntoChartFormat(this.dataIsomap, this.dataPackage.isomap);
+    this.dataIsomap = this.insertDataIntoChartFormat(this.dataPackage.isomap);
+    this.dataLocallyLinearEmbedding = this.insertDataIntoChartFormat(this.dataPackage.locallyLinearEmbedding);
+    this.dataMDS = this.insertDataIntoChartFormat(this.dataPackage.MDS);
+    this.dataTSNE = this.insertDataIntoChartFormat(this.dataPackage.TSNE);
+    this.dataSpectralEmbedding = this.insertDataIntoChartFormat(this.dataPackage.spectralEmbedding);
   }
 
-  insertDataIntoChartFormat(data: [(string | number)[]], inputData: ChartModel[]) {
-    data = [['', 0, 0]];
+  insertDataIntoChartFormat(inputData: ChartModel[]) {
+    const data = [['', 0, 0]];
     data.pop();
     for (const record of inputData) {
       data.push([
@@ -50,5 +54,6 @@ export class TwoDimChartComponent implements OnInit {
         record.color
       ]);
     }
+    return data;
   }
 }

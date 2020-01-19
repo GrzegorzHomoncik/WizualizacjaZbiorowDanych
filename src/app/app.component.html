@@ -50,8 +50,7 @@
 
 <div *ngIf="responseLoaded">
   <div *ngIf="nrOfDimensions==2">
-    <app-two-dim-chart>
-
+    <app-two-dim-chart [dataPackage]="resp">
     </app-two-dim-chart>
   </div>
   <div *ngIf="nrOfDimensions==3">
