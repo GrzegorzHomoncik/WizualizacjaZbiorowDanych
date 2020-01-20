@@ -1,8 +1,8 @@
 <div class="row">
-    <div class="col-md-3">
-        <a style="text-align: right; font-size: x-large;">Wymiarowość wyników:</a>
-    </div>
-  <div class="col-md-9">
+  <div class="col-md-4">
+    <a style="text-align: right; font-size: x-large;">Wymiarowość wyników:</a>
+  </div>
+  <div class="col-md-8">
     <select class="browser-default custom-select custom-select-lg mb-3" [(ngModel)]="nrOfDimensions"
             (ngModelChange)="uploader.onChangeofOptions($event)">
       <option value=2>2</option>
@@ -12,53 +12,61 @@
 </div>
 
 <div class="row">
-        <div class="col-md-4">
-            <h3>Wybierz plik</h3>
-            <input type="file" #fileInput multiple/>
-            <button (click)="addToQueue()">załącz</button>
-        </div>
+  <div class="col-md-4">
+    <h3>Wybrany plik</h3>
+    <div class="m-2">
+      <input type="file" #fileInput multiple/>
+    </div>
+    <div class="m-2">
+      <button (click)="addToQueue()">załącz</button>
+    </div>
+  </div>
 
   <div class="col-md-8">
-            <h3>Kolejka wysyłania</h3>
-            <table class="table table-striped">
-                <thead>
-                    <tr>
-                        <th class="text-left">Nazwa</th>
-                        <th class="text-right">Rozmiar</th>
-                        <th class="text-left">Progres</th>
-                        <th class="text-left">Status</th>
-                        <th class="text-right">Akcja</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr *ngFor="let item of queue | async">
-                        <td>{{ item?.file?.name }}</td>
-                        <td class="text-right">{{ item?.file?.size/1024/1024 | number:'.2' }} MB</td>
-                        <td>{{ item.progress + ' %' }}</td>
-                        <td>
-                            <span *ngIf="item.isPending()" class="tag tag-default"></span>
-                            <span *ngIf="item.isSuccess()" class="tag tag-success"></span>
-                            <span *ngIf="item.inProgress()" class="tag tag-warning"></span>
-                            <span *ngIf="item.isError()" class="tag tag-danger"></span>
-                        </td>
-                        <td class="text-right">
-                            <a tooltip="Upload file" (click)="item.upload()" *ngIf="item.isUploadable()">
-                                <i class="fa fa-upload"></i>
-                            </a>
-                            <a tooltip="Cancel upload" (click)="item.cancel()" *ngIf="item.inProgress()">
-                                <i class="fa fa-times-circle"></i>
-                            </a>
-                            <a tooltip="Remove from queue" (click)="item.remove()" *ngIf="!item.inProgress()">
-                                <i class="fa fa-trash"></i>
-                            </a>
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
-            <div>
-                <a class="btn btn-warning btn-outline-warning" (click)="uploader.clearQueue()">Wyczyść</a>
-                <a class="btn btn-success btn-outline-success" (click)="uploader.uploadAll()">Wyślij</a>
-            </div>
-        </div>
+    <h3>Kolejka wysyłania</h3>
+    <table class="table table-striped">
+      <thead>
+      <tr>
+        <th class="text-left">Nazwa</th>
+        <th class="text-right">Rozmiar</th>
+        <th class="text-left">Progres</th>
+        <th class="text-left">Status</th>
+        <th class="text-right">Akcja</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr *ngFor="let item of queue | async">
+        <td>{{ item?.file?.name }}</td>
+        <td class="text-right">{{ item?.file?.size / 1024 / 1024 | number:'.2' }} MB</td>
+        <td>{{ item.progress + ' %' }}</td>
+        <td>
+          <span *ngIf="item.isPending()" class="tag tag-default"></span>
+          <span *ngIf="item.isSuccess()" class="tag tag-success"></span>
+          <span *ngIf="item.inProgress()" class="tag tag-warning"></span>
+          <span *ngIf="item.isError()" class="tag tag-danger"></span>
+        </td>
+        <td class="text-right">
+          <a tooltip="Upload file" (click)="item.upload()" *ngIf="item.isUploadable()">
+            <i class="fa fa-upload"></i>
+          </a>
+          <a tooltip="Cancel upload" (click)="item.cancel()" *ngIf="item.inProgress()">
+            <i class="fa fa-times-circle"></i>
+          </a>
+          <a tooltip="Remove from queue" (click)="item.remove()" *ngIf="!item.inProgress()">
+            <i class="fa fa-trash"></i>
+          </a>
+        </td>
+      </tr>
+      </tbody>
+    </table>
+    <div class="btn-block">
+      <div class="m-2 d-inline">
+        <a class="btn btn-warning btn-outline-warning" (click)="uploader.clearQueue()">Wyczyść</a>
+      </div>
+      <div class="m-2 d-inline">
+        <a class="btn btn-success btn-outline-success" (click)="uploader.uploadAll()">Wyślij</a>
+      </div>
+    </div>
+  </div>
 
 </div>
