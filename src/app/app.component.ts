@@ -40,7 +40,7 @@ export class AppComponent {
         case 2:
           return 'blue';
         case 3:
-          return 'yellow';
+          return 'orange';
       }
     }
 

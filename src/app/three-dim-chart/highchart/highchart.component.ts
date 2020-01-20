@@ -5,8 +5,7 @@ import highcharts3D from 'highcharts/highcharts-3d.src';
 
 @Component({
   selector: 'app-highchart',
-  templateUrl: './highchart.component.html',
-  styleUrls: ['./highchart.component.css']
+  templateUrl: './highchart.component.html'
 })
 export class HighchartComponent implements OnChanges {
 
