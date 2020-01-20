@@ -10,10 +10,10 @@ import {FileUploaderService} from './file-uploader.service';
 import {NavBarComponent} from './nav-bar/nav-bar.component';
 import {TwoDimChartComponent} from './chart/two-dim-chart.component';
 import {GoogleChartsModule} from 'angular-google-charts';
-import {CustomChartComponent} from './chart/custom-chart/custom-chart.component';
 import {HighchartComponent} from './three-dim-chart/highchart/highchart.component';
 import {HighchartsChartModule} from 'highcharts-angular';
 import {ThreeDimChartComponent} from './three-dim-chart/three-dim-chart.component';
+import {HighchartTwoDimComponent} from './chart/highchart-two-dim/highchart-two-dim.component';
 
 @NgModule({
   declarations: [
@@ -21,9 +21,9 @@ import {ThreeDimChartComponent} from './three-dim-chart/three-dim-chart.componen
     FileUploaderComponent,
     NavBarComponent,
     TwoDimChartComponent,
-    CustomChartComponent,
     HighchartComponent,
-    ThreeDimChartComponent
+    ThreeDimChartComponent,
+    HighchartTwoDimComponent
   ],
   imports: [
     GoogleChartsModule,

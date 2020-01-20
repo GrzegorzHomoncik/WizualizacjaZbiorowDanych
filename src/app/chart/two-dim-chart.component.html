@@ -1,24 +1,45 @@
 <div class="container">
   <div class="panel panel-default">
-    <div class="panel-body">
-      <google-chart #chart
-                    title="Isomap"
-                    [type]="type"
-                    [data]="dataIsomap"
-                    [columnNames]="columnNames"
-                    [options]="options"></google-chart>
+    <div class="panel-heading">
+      <app-highchart-two-dim
+        title="Isomap"
+        [chartData]="dataPackage.isomap"></app-highchart-two-dim>
     </div>
   </div>
 </div>
 <div class="container">
   <div class="panel panel-default">
-    <div class="panel-body">
-      <google-chart #chart
-                    title="Isomap"
-                    [type]="type"
-                    [data]="dataIsomap"
-                    [columnNames]="columnNames"
-                    [options]="options"></google-chart>
+    <div class="panel-heading">
+      <app-highchart-two-dim
+        title="Locally Linear Embedding"
+        [chartData]="dataPackage.locallyLinearEmbedding"></app-highchart-two-dim>
+    </div>
+  </div>
+</div>
+<div class="container">
+  <div class="panel panel-default">
+    <div class="panel-heading">
+      <app-highchart-two-dim
+        title="MDS"
+        [chartData]="dataPackage.MDS"></app-highchart-two-dim>
+    </div>
+  </div>
+</div>
+<div class="container">
+  <div class="panel panel-default">
+    <div class="panel-heading">
+      <app-highchart-two-dim
+        title="TSNE"
+        [chartData]="dataPackage.TSNE"></app-highchart-two-dim>
+    </div>
+  </div>
+</div>
+<div class="container">
+  <div class="panel panel-default">
+    <div class="panel-heading">
+      <app-highchart-two-dim
+        title="Spectral Embedding"
+        [chartData]="dataPackage.spectralEmbedding"></app-highchart-two-dim>
     </div>
   </div>
 </div>
