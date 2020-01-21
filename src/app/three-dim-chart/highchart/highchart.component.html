@@ -1,4 +1,7 @@
-<div id="container">
+<div id="container"
+     (mousedown)="mouseClicked=true"
+     (mouseup)="mouseClicked=false"
+     (document:mousemove)="onMouseMove($event)">
   <highcharts-chart
     [Highcharts]="highcharts"
     [options]="chartOptions"
