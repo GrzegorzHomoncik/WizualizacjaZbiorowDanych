@@ -1,4 +1,4 @@
-import {Component, Input, OnChanges} from '@angular/core';
+import {Component, HostListener, Input, OnChanges} from '@angular/core';
 import * as Highcharts from 'highcharts';
 import highcharts3D from 'highcharts/highcharts-3d.src';
 
@@ -11,9 +11,14 @@ export class HighchartComponent implements OnChanges {
 
   @Input() chartData: {}[];
   @Input() title: string;
+  mouseClicked = false;
+  previousX: number;
+  previousY: number;
 
   chartOptions: any;
   highcharts = Highcharts;
+  private alpha = 10;
+  private beta = 30;
 
   ngOnChanges() {
     this.chartOptions = {
@@ -22,8 +27,8 @@ export class HighchartComponent implements OnChanges {
         backgroundColor: 'transparent',
         options3d: {
           enabled: true,
-          alpha: 10,
-          beta: 30,
+          alpha: this.alpha,
+          beta: this.beta,
           depth: 250,
           viewDistance: 3,
           frame: {
@@ -62,53 +67,18 @@ export class HighchartComponent implements OnChanges {
     highcharts3D(Highcharts);
   }
 
-  /*
+  @HostListener('document:mousemove', ['$event'])
+  onMouseMove(e) {
+    if (this.mouseClicked) {
+      this.alpha -= (this.previousY - e.clientY) * 0.2;
+      this.beta += (this.previousX - e.clientX) * 0.2;
+      console.log(this.alpha);
+      this.ngOnChanges();
+    }
+    this.previousX = e.clientX;
+    this.previousY = e.clientY;
+  }
 
-  (function (H) {
-      function dragStart(eStart) {
-        eStart = chart.pointer.normalize(eStart);
-
-        var posX = eStart.chartX,
-          posY = eStart.chartY,
-          alpha = chart.options.chart.options3d.alpha,
-          beta = chart.options.chart.options3d.beta,
-          sensitivity = 5,  // lower is more sensitive
-          handlers = [];
-
-        function drag(e) {
-          // Get e.chartX and e.chartY
-          e = chart.pointer.normalize(e);
-
-          chart.update({
-            chart: {
-              options3d: {
-                alpha: alpha + (e.chartY - posY) / sensitivity,
-                beta: beta + (posX - e.chartX) / sensitivity
-              }
-            }
-          }, undefined, undefined, false);
-        }
-
-        function unbindAll() {
-          handlers.forEach(function (unbind) {
-            if (unbind) {
-              unbind();
-            }
-          });
-          handlers.length = 0;
-        }
-
-        handlers.push(H.addEvent(document, 'mousemove', drag));
-        handlers.push(H.addEvent(document, 'touchmove', drag));
-
-
-        handlers.push(H.addEvent(document, 'mouseup', unbindAll));
-        handlers.push(H.addEvent(document, 'touchend', unbindAll));
-      }
-      H.addEvent(chart.container, 'mousedown', dragStart);
-      H.addEvent(chart.container, 'touchstart', dragStart);
-    }(Highcharts));
-  */
 
 }
 
