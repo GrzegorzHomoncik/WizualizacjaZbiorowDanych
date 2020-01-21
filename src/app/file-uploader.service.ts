@@ -49,6 +49,7 @@ export class FileUploaderService {
 
   private _queue: BehaviorSubject<FileQueueObject[]>;
   private _files: FileQueueObject[] = [];
+  private _success: boolean = false;
 
   constructor(private http: HttpClient) {
     this._queue = <BehaviorSubject<FileQueueObject[]>>new BehaviorSubject(this._files);
@@ -122,10 +123,12 @@ export class FileUploaderService {
     // upload file and report progress
     queueObj.request = this.http.request(req).subscribe(
       (event: any) => {
-        if (event.type === HttpEventType.UploadProgress) {
-          this._uploadProgress(queueObj, event);
-        } else if (event instanceof HttpResponse) {
+
+        if (event instanceof HttpResponse) {
           this._uploadComplete(queueObj, event);
+        }
+        else{
+
         }
       },
       (err: HttpErrorResponse) => {
@@ -138,7 +141,11 @@ export class FileUploaderService {
         }
       }
     );
-
+    this._success = false;
+    setTimeout(() => {
+      this._uploadProgress(queueObj);
+  }, 5000);
+ 
     return queueObj;
   }
 
@@ -150,16 +157,31 @@ export class FileUploaderService {
     this._queue.next(this._files);
   }
 
-  private _uploadProgress(queueObj: FileQueueObject, event: any) {
+  private _uploadProgress(queueObj: FileQueueObject) {
     // update the FileQueueObject with the current progress
-    const progress = Math.round(100 * event.loaded / event.total);
-    queueObj.progress = progress;
-    queueObj.status = FileQueueStatus.Progress;
+    var progress;
+    var i = 0;
+    console.log("prog");
+    for(let i = 0;  i<100; i++){
+      setTimeout(() => {
+        if(!this._success){
+          this.http.get('http://127.0.0.1:5000/progress/').subscribe(data=>{
+            progress = data;
+            if(progress>0){
+            queueObj.progress = Math.round(100 * progress);
+            }
+            queueObj.status = FileQueueStatus.Progress;
+          })
+        }
+    }, 2000*(i+1));
+  }
+
     this._queue.next(this._files);
   }
 
   private _uploadComplete(queueObj: FileQueueObject, response: HttpResponse<any>) {
     // update the FileQueueObject as completed
+    this._success= true;
     queueObj.progress = 100;
     queueObj.status = FileQueueStatus.Success;
     queueObj.response = response;
@@ -174,5 +196,7 @@ export class FileUploaderService {
     queueObj.response = response;
     this._queue.next(this._files);
   }
-
+  async delay(ms: number) {
+    await new Promise(resolve => setTimeout(()=>resolve(), ms)).then(()=>console.log("fired"));
+}
 }
