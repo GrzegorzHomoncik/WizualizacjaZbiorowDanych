@@ -52,6 +52,9 @@ export class HighchartComponent implements OnChanges {
         footerFormat: '</p>',
         followPointer: true
       },
+      legend: {
+        enabled: false
+      },
       series: [{
         data: this.chartData
       }]
