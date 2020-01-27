@@ -1,7 +1,7 @@
 import * as _ from 'lodash';
 
-import {HttpClient, HttpErrorResponse, HttpEventType, HttpRequest, HttpResponse} from '@angular/common/http';
-import {Injectable} from '@angular/core';
+import {HttpClient, HttpErrorResponse, HttpRequest, HttpResponse} from '@angular/common/http';
+import {Injectable, OnInit} from '@angular/core';
 
 import {BehaviorSubject, Subscription} from 'rxjs';
 
@@ -15,7 +15,7 @@ export enum FileQueueStatus {
 export class FileQueueObject {
   public file: any;
   public status: FileQueueStatus = FileQueueStatus.Pending;
-  public progress: number = 0;
+  public progress = 0;
   public request: Subscription = null;
   public response: HttpResponse<any> | HttpErrorResponse = null;
 
@@ -25,11 +25,11 @@ export class FileQueueObject {
 
   // actions
   public upload = () => { /* set in service */
-  };
+  }
   public cancel = () => { /* set in service */
-  };
+  }
   public remove = () => { /* set in service */
-  };
+  }
 
   // statuses
   public isPending = () => this.status === FileQueueStatus.Pending;
@@ -42,17 +42,18 @@ export class FileQueueObject {
 
 // tslint:disable-next-line:max-classes-per-file
 @Injectable()
-export class FileUploaderService {
+export class FileUploaderService implements OnInit {
 
-  public baseUrl: string = 'http://127.0.0.1:5000/';
-  public url: string = 'http://127.0.0.1:5000/';
+  public baseUrl = 'http://127.0.0.1:5000/';
+  public url = 'http://127.0.0.1:5000/?dimensions=2';
 
+  // tslint:disable:variable-name
   private _queue: BehaviorSubject<FileQueueObject[]>;
   private _files: FileQueueObject[] = [];
-  private _success: boolean = false;
+  private _success = false;
 
   constructor(private http: HttpClient) {
-    this._queue = <BehaviorSubject<FileQueueObject[]>>new BehaviorSubject(this._files);
+    this._queue = new BehaviorSubject(this._files) as BehaviorSubject<FileQueueObject[]>;
   }
 
   // the queue
@@ -126,8 +127,7 @@ export class FileUploaderService {
 
         if (event instanceof HttpResponse) {
           this._uploadComplete(queueObj, event);
-        }
-        else{
+        } else {
 
         }
       },
@@ -144,8 +144,8 @@ export class FileUploaderService {
     this._success = false;
     setTimeout(() => {
       this._uploadProgress(queueObj);
-  }, 5000);
- 
+    }, 5000);
+
     return queueObj;
   }
 
@@ -159,29 +159,27 @@ export class FileUploaderService {
 
   private _uploadProgress(queueObj: FileQueueObject) {
     // update the FileQueueObject with the current progress
-    var progress;
-    var i = 0;
-    console.log("prog");
-    for(let i = 0;  i<100; i++){
+    let progress;
+    console.log('prog');
+    for (let i = 0; i < 20; i++) {
       setTimeout(() => {
-        if(!this._success){
-          this.http.get('http://127.0.0.1:5000/progress/').subscribe(data=>{
+        if (!this._success) {
+          this.http.get('http://127.0.0.1:5000/progress/').subscribe(data => {
             progress = data;
-            if(progress>0){
-            queueObj.progress = Math.round(100 * progress);
+            if (progress > 0) {
+              queueObj.progress = Math.round(100 * progress);
             }
             queueObj.status = FileQueueStatus.Progress;
-          })
+          });
         }
-    }, 2000*(i+1));
-  }
-
+      }, 2000 * (i + 1));
+    }
     this._queue.next(this._files);
   }
 
   private _uploadComplete(queueObj: FileQueueObject, response: HttpResponse<any>) {
     // update the FileQueueObject as completed
-    this._success= true;
+    this._success = true;
     queueObj.progress = 100;
     queueObj.status = FileQueueStatus.Success;
     queueObj.response = response;
@@ -196,7 +194,11 @@ export class FileUploaderService {
     queueObj.response = response;
     this._queue.next(this._files);
   }
+
   async delay(ms: number) {
-    await new Promise(resolve => setTimeout(()=>resolve(), ms)).then(()=>console.log("fired"));
-}
+    await new Promise(resolve => setTimeout(() => resolve(), ms)).then(() => console.log('fired'));
+  }
+
+  ngOnInit(): void {
+  }
 }
