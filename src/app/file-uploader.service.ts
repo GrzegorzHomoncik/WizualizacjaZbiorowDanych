@@ -160,7 +160,6 @@ export class FileUploaderService implements OnInit {
   private _uploadProgress(queueObj: FileQueueObject) {
     // update the FileQueueObject with the current progress
     let progress;
-    console.log('prog');
     for (let i = 0; i < 20; i++) {
       setTimeout(() => {
         if (!this._success) {
@@ -193,10 +192,6 @@ export class FileUploaderService implements OnInit {
     queueObj.status = FileQueueStatus.Error;
     queueObj.response = response;
     this._queue.next(this._files);
-  }
-
-  async delay(ms: number) {
-    await new Promise(resolve => setTimeout(() => resolve(), ms)).then(() => console.log('fired'));
   }
 
   ngOnInit(): void {
