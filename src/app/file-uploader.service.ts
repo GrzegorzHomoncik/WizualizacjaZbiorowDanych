@@ -44,8 +44,8 @@ export class FileQueueObject {
 @Injectable()
 export class FileUploaderService implements OnInit {
 
-  public baseUrl = 'http://127.0.0.1:5000/';
-  public url = 'http://127.0.0.1:5000/?dimensions=2';
+  public baseUrl = 'http://localhost:5000/';
+  public url = 'http://localhost:5000/?dimensions=2';
 
   // tslint:disable:variable-name
   private _queue: BehaviorSubject<FileQueueObject[]>;
@@ -163,7 +163,7 @@ export class FileUploaderService implements OnInit {
     for (let i = 0; i < 20; i++) {
       setTimeout(() => {
         if (!this._success) {
-          this.http.get('http://127.0.0.1:5000/progress/').subscribe(data => {
+          this.http.get(this.baseUrl+'progress/').subscribe(data => {
             progress = data;
             if (progress > 0) {
               queueObj.progress = Math.round(100 * progress);
