@@ -166,7 +166,7 @@ export class FileUploaderService {
       setTimeout(() => {
         if(!this._success){
           this.http.get('http://127.0.0.1:5000/progress/').subscribe(data=>{
-            progress = data;
+            progress = data[0].progress;
             if(progress>0){
             queueObj.progress = Math.round(100 * progress);
             }
