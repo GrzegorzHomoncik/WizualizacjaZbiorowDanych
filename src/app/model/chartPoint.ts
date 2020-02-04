@@ -1,4 +1,4 @@
-export class ChartModel {
+export class ChartPoint {
   x: number;
   y: number;
   z?: number;

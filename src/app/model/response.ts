@@ -1,9 +1,9 @@
-import {ChartModel} from './chartModel';
+import {ChartPoint} from './chartPoint';
 
 export class Response {
-  isomap: ChartModel[];
-  locallyLinearEmbedding: ChartModel[];
-  MDS: ChartModel[];
-  TSNE: ChartModel[];
-  spectralEmbedding: ChartModel[];
+  isomap: ChartPoint[];
+  locallyLinearEmbedding: ChartPoint[];
+  MDS: ChartPoint[];
+  TSNE: ChartPoint[];
+  spectralEmbedding: ChartPoint[];
 }

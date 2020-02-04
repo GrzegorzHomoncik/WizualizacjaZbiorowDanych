@@ -1,6 +1,6 @@
 import {Component} from '@angular/core';
 import {Response} from './model/response';
-import {ChartModel} from './model/chartModel';
+import {ChartPoint} from './model/chartPoint';
 import {Model} from './model/model';
 
 @Component({
@@ -46,7 +46,7 @@ export class AppComponent {
       }
     }
 
-    const chartModel: ChartModel = {
+    const chartModel: ChartPoint = {
       x: model.position[0],
       y: model.position[1],
       z: model.position[2],
