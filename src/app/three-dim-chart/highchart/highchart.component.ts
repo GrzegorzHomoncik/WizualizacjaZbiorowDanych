@@ -72,7 +72,6 @@ export class HighchartComponent implements OnChanges {
     if (this.mouseClicked) {
       this.alpha -= (this.previousY - e.clientY) * 0.2;
       this.beta += (this.previousX - e.clientX) * 0.2;
-      console.log(this.alpha);
       this.ngOnChanges();
     }
     this.previousX = e.clientX;

@@ -16,7 +16,7 @@ export class FileUploaderComponent implements OnInit {
   @ViewChild('fileInput') fileInput;
   queue: Observable<FileQueueObject[]>;
 
-  public nrOfDimensions: number;
+  public nrOfDimensions = 2;
 
   constructor(public uploader: FileUploaderService) {
   }
