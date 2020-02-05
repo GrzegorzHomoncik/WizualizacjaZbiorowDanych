@@ -4,6 +4,8 @@ import {HttpClient, HttpErrorResponse, HttpRequest, HttpResponse} from '@angular
 import {Injectable, OnInit} from '@angular/core';
 
 import {BehaviorSubject, Subscription} from 'rxjs';
+import {Prog} from './progresModel'
+
 
 export enum FileQueueStatus {
   Pending,
@@ -51,7 +53,7 @@ export class FileUploaderService implements OnInit {
   private _queue: BehaviorSubject<FileQueueObject[]>;
   private _files: FileQueueObject[] = [];
   private _success = false;
-
+  private response = [{}]
   constructor(private http: HttpClient) {
     this._queue = new BehaviorSubject(this._files) as BehaviorSubject<FileQueueObject[]>;
   }
@@ -128,7 +130,7 @@ export class FileUploaderService implements OnInit {
         if (event instanceof HttpResponse) {
           this._uploadComplete(queueObj, event);
         } else {
-
+          queueObj.status = FileQueueStatus.Progress;
         }
       },
       (err: HttpErrorResponse) => {
@@ -156,20 +158,45 @@ export class FileUploaderService implements OnInit {
     queueObj.status = FileQueueStatus.Pending;
     this._queue.next(this._files);
   }
-
+  private getProgres(){
+    return this.http.get<Prog[]>('http://127.0.0.1:5000/progress/');
+  }
   private _uploadProgress(queueObj: FileQueueObject) {
     // update the FileQueueObject with the current progress
+    let res : Prog;
     let progress;
-    for (let i = 0; i < 20; i++) {
+    for (let i = 0; i < 200; i++) {
       setTimeout(() => {
-        if (!this._success) {
-          this.http.get(this.baseUrl+'progress/').subscribe(data => {
-            progress = data;
-            if (progress > 0) {
-              queueObj.progress = Math.round(100 * progress);
+        if(!this._success){
+
+          this.getProgres().subscribe( data=> {
+            for(let j = 0; j < data.length; ++j){
+              if(data[j].file_name == this._files[0].file.name){
+                progress = data[j].progress;
+                if(progress > 0){
+                  queueObj.progress = Math.round(100 * progress);
+                }
+                queueObj.status = FileQueueStatus.Progress;
+              }
+            }
+          })
+/*
+          this.getProgres().subscribe( data=> res ={
+            file_name: (data as any).file_name,
+            progress:  (data as any).progerss,
+          })
+          console.log(res);
+          */
+         /*
+          this.http.get<Prog[]>('http://127.0.0.1:5000/progress/').subscribe(data=>{
+            progress = data[0].progress;
+            if(progress>0){
+            queueObj.progress = Math.round(100 * progress);
+
             }
             queueObj.status = FileQueueStatus.Progress;
           });
+          */
         }
       }, 2000 * (i + 1));
     }
@@ -188,6 +215,7 @@ export class FileUploaderService implements OnInit {
 
   private _uploadFailed(queueObj: FileQueueObject, response: HttpErrorResponse) {
     // update the FileQueueObject as errored
+    this._success = true;
     queueObj.progress = 0;
     queueObj.status = FileQueueStatus.Error;
     queueObj.response = response;
